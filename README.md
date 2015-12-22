@@ -1,5 +1,7 @@
 # Devoops: Gomega matchers for ops testing
 
+[![Build Status](https://travis-ci.org/glestaris/devoops.svg)](https://travis-ci.org/glestaris/devoops)
+
 This is a [Gomega](https://onsi.github.io/gomega/) matchers library that helps
 with asserting on the running processes.
 
