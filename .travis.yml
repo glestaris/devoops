@@ -6,5 +6,6 @@ before_script:
   - go vet ./...
 install:
   - go get github.com/onsi/ginkgo/ginkgo
+  - go get ./...
 script:
   - ginkgo -p -r -race .
