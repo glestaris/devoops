@@ -1,0 +1,10 @@
+language: go
+sudo: false
+go:
+  - "1.5"
+before_script:
+  - go vet ./...
+install:
+  - go get github.com/onsi/ginkgo/ginkgo
+script:
+  - ginkgo -p -r -race .
