@@ -11,6 +11,16 @@ type Process struct {
 	Pid         int
 	ProgramName string
 	Args        []string
+	Env         []string
+}
+
+func parentEnv(p *process.Process) []string {
+	pp, err := p.Parent()
+	if err != nil {
+		return []string{}
+	}
+
+	return envForPid(int(pp.Pid))
 }
 
 func FindByPid(pid int) (Process, error) {
@@ -28,16 +38,22 @@ func FindByPid(pid int) (Process, error) {
 		return Process{}, wrapProcErr(err)
 	}
 
+	// command line arguments
 	cmdline, err := p.Cmdline()
 	if err != nil {
 		return Process{}, wrapProcErr(err)
 	}
 	cmdArgs := strings.Split(cmdline, " ")
 
+	// environvent variables
+	env := envForPid(pid)
+	env = append(env, parentEnv(p)...)
+
 	return Process{
 		Pid:         pid,
 		ProgramName: cmdArgs[0],
 		Args:        cmdArgs[1:],
+		Env:         env,
 	}, nil
 }
 

@@ -24,12 +24,7 @@ var _ = Describe("ProcessFinder", func() {
 			&exec.Cmd{
 				Path: path,
 				Args: []string{"sleep", "100"},
-				Env: []string{
-					"banana=best_fruit",
-					"environ=1",
-					"hello=world",
-				},
-				Dir: "/tmp",
+				Dir:  "/tmp",
 			},
 			GinkgoWriter, GinkgoWriter,
 		)
